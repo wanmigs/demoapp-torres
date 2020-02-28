@@ -1,0 +1,8 @@
+<app-table-topbar></app-table-topbar>
+<app-user-lists [users]="filterUsers()"></app-user-lists>
+<div
+  class="border flex justify-center"
+  *ngIf="userService.users && !userService.users.length"
+>
+  <img class="h-64" src="assets/images/empty.gif" />
+</div>

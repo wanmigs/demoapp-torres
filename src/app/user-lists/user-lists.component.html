@@ -1,0 +1,73 @@
+<table class="border table table-striped table-hover w-full">
+  <thead>
+    <tr>
+      <th>
+        <div
+          class="px-4 py-3 flex text-left text-sm tracking-wide capitalize bg-white"
+        >
+          <span class="flex items-center w-5/12">
+            <input
+              (click)="onToggleSelect($event)"
+              class="mr-3 form-checkbox text-primary-500 text-lg"
+              type="checkbox"
+              [checked]="
+                users && selected.length === users.length && selected.length
+              "
+            />
+            Basic Info
+          </span>
+          <span class="w-5/12">Address</span>
+          <span class="text-center w-2/12">Updated At</span>
+        </div>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users">
+      <td>
+        <section
+          class="border-t border-gray-200 hover:bg-primary-100 transition duration-200 px-4 py-2"
+        >
+          <div class="flex block">
+            <span class="flex font-medium items-center w-5/12">
+              <input
+                class="mr-3 form-checkbox text-primary-500 text-lg"
+                type="checkbox"
+                (click)="onSelect($event, user._id)"
+                [checked]="selected.includes(user._id)"
+              />
+              <div class="flex w-full">
+                <div class="flex flex-col w-full">
+                  <a
+                    [routerLink]="['/user/' + user._id]"
+                    class="no-underline cursor-pointer font-semibold text-secondary-500 cursor-pointer"
+                    >{{ user.user_fullname }}
+                  </a>
+                  <span class="text-sm text-gray-500">{{
+                    user.user_email
+                  }}</span>
+                </div>
+              </div>
+            </span>
+
+            <span
+              class="text-gray-800 column w-5/12 pr-2 flex-col items-center whitespace-pre-line"
+            >
+              {{ user.user_address }}
+            </span>
+
+            <span class="flex flex-col items-center text-center text-sm w-2/12">
+              <span class="block mb-1">{{ user.updated_at | date }}</span>
+              <span class="block text-gray-500">{{
+                user.updated_at | date: "mediumTime"
+              }}</span>
+            </span>
+          </div>
+        </section>
+      </td>
+    </tr>
+
+    <!---->
+  </tbody>
+  <!---->
+</table>

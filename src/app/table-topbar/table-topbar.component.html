@@ -1,0 +1,41 @@
+<div class="bg-white flex justify-between pb-6 pt-8">
+  <div class="flex items-center">
+    <div class="flex relative" style="width: 24em;">
+      <div class="flex items-center w-full">
+        <input
+          type="text"
+          placeholder="Search"
+          class="form-input pl-10"
+          [(ngModel)]="userService.search"
+        />
+        <span class="m-3 absolute left-0 top-0 text-gray-500">
+          <svg class="feather-icon mr-2">
+            <use xlink:href="assets/images/svg/feather-sprite.svg#search"></use>
+          </svg>
+        </span>
+      </div>
+    </div>
+    <!---->
+  </div>
+  <div class="flex items-center">
+    <a
+      [routerLink]="['/user/add']"
+      class="bg-primary-100 border-primary-300 btn-secondary hover:bg-primary-200 hover:border-primary-400 hover:text-primary-600 text-primary-500 text-xs mr-2"
+    >
+      <svg class="feather-icon mr-2">
+        <use xlink:href="assets/images/svg/feather-sprite.svg#plus"></use>
+      </svg>
+      New User
+    </a>
+    <button
+      (click)="onDelete()"
+      [disabled]="!userService.selected.length"
+      class="bg-red-200 border-red-300 btn-secondary hover:bg-red-300 hover:border-red-400 hover:text-red-600 text-red-500 text-xs"
+    >
+      <svg class="feather-icon mr-2">
+        <use xlink:href="assets/images/svg/feather-sprite.svg#trash"></use>
+      </svg>
+      Delete
+    </button>
+  </div>
+</div>

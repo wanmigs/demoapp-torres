@@ -1,0 +1,97 @@
+<div class="w-full max-w-sm mx-auto">
+  <span class="flex font-semibold items-center leading-normal text-2xl my-6">
+    <svg class="feather-icon h-6 w-6 mr-2">
+      <use
+        xlink:href="assets/images/svg/feather-sprite.svg#edit-2"
+        *ngIf="userId"
+      ></use>
+      <use
+        xlink:href="assets/images/svg/feather-sprite.svg#plus"
+        *ngIf="!userId"
+      ></use>
+    </svg>
+    {{ userId ? "Edit User" : "New User" }}
+  </span>
+
+  <form
+    class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+    [formGroup]="userForm"
+    (ngSubmit)="onSubmit()"
+  >
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2">
+        Full Name <span class="text-red-400">*</span>
+      </label>
+      <input
+        class="form-input"
+        formControlName="user_fullname"
+        type="text"
+        placeholder="Full Name"
+        [(ngModel)]="user.user_fullname"
+      />
+      <div *ngIf="userForm.get('user_fullname').invalid && submitted">
+        <p
+          class="text-red-500 text-xs italic"
+          *ngIf="userForm.get('user_fullname').errors.required"
+        >
+          Field is required.
+        </p>
+      </div>
+    </div>
+    <div class="mb-6">
+      <label class="block text-gray-700 text-sm font-bold mb-2">
+        Email <span class="text-red-400">*</span>
+      </label>
+      <input
+        type="text"
+        class="form-input"
+        [class.is-invalid]="userForm.get('user_email').invalid && submitted"
+        formControlName="user_email"
+        placeholder="Email"
+        [(ngModel)]="user.user_email"
+      />
+      <div *ngIf="userForm.get('user_email').invalid && submitted">
+        <p
+          class="text-red-500 text-xs italic"
+          *ngIf="userForm.get('user_email').errors.required"
+        >
+          Field is required.
+        </p>
+        <p
+          class="text-red-500 text-xs italic"
+          *ngIf="userForm.get('user_email').errors.email"
+        >
+          Invalid Email
+        </p>
+      </div>
+    </div>
+    <div class="mb-6">
+      <label class="block text-gray-700 text-sm font-bold mb-2">
+        Address <span class="text-red-400">*</span>
+      </label>
+      <textarea
+        formControlName="user_address"
+        class="form-textarea form-input resize-none mt-1 block w-full"
+        rows="3"
+        [(ngModel)]="user.user_address"
+      ></textarea>
+      <div *ngIf="userForm.get('user_address').invalid && submitted">
+        <p
+          class="text-red-500 text-xs italic"
+          *ngIf="userForm.get('user_address').errors.required"
+        >
+          Field is required.
+        </p>
+      </div>
+    </div>
+
+    <div class="flex items-center">
+      <button
+        class="bg-primary-100 border-primary-300 btn-secondary hover:bg-primary-200 hover:border-primary-400 hover:text-primary-600 mr-2 text-primary-500 text-xs"
+      >
+        {{ userId ? "Update" : "Save" }}
+      </button>
+      <a [routerLink]="['/']" class="btn-tertiary text-xs">Cancel</a>
+    </div>
+  </form>
+</div>
